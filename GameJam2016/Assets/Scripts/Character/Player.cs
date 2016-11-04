@@ -50,6 +50,11 @@ public class Player : MonoBehaviour {
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		int wallDirX = (controller.collisions.left) ? -1 : 1;
 
+		if (input.x != 0)
+			GetComponent<Animator> ().SetBool ("Running", true);
+		else 
+			GetComponent<Animator> ().SetBool ("Running", false);
+
 		float targetVelocityX = input.x * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 
@@ -57,7 +62,7 @@ public class Player : MonoBehaviour {
 			CheckForTrigger ();
 			
 		bool wallSliding = false;
-		if (((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) && (controller.collisions.hit && controller.collisions.hit.collider.tag != "Stone")) {
+		if (((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)) {
 			wallSliding = true;
 
 			if (velocity.y < -wallSlideSpeedMax) {
@@ -77,9 +82,12 @@ public class Player : MonoBehaviour {
 				timeToWallUnstick = wallStickTime;
 			}
 
-		} else if (((controller.collisions.left || controller.collisions.right) && controller.collisions.below && velocity.y == 0) && (controller.collisions.hit && controller.collisions.hit.collider.tag == "Stone")){
-			Debug.Log("Stone");
-			controller.collisions.hit.collider.gameObject.GetComponent<Stone>().Move (controller.collisions.faceDir);
+		} 
+
+		if (((controller.collisions.left || controller.collisions.right) && controller.collisions.below && velocity.y == 0) && (controller.collisions.hit)){
+			if (controller.collisions.hit.collider.tag == "Stone" && velocity.y == 0) {
+				controller.collisions.hit.collider.transform.gameObject.GetComponent<Stone> ().Move (controller.collisions.faceDir);
+			}
 		}
 
 		if (Input.GetButtonDown ("Jump")) {
