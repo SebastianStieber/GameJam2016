@@ -21,3 +21,5 @@ C:\Users\Misaki\Desktop\Gamejam\GameJam2016\GameJam2016\Temp\bin\Debug\UnityEngi
 C:\Users\Misaki\Desktop\Gamejam\GameJam2016\GameJam2016\Temp\bin\Debug\UnityEngine.Analytics.xml
 C:\Users\Misaki\Desktop\Gamejam\GameJam2016\GameJam2016\obj\Debug\Assembly-CSharp.dll
 C:\Users\Misaki\Desktop\Gamejam\GameJam2016\GameJam2016\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Gogo\Desktop\GameJam2016\GameJam2016\obj\Debug\Assembly-CSharp.dll
+C:\Users\Gogo\Desktop\GameJam2016\GameJam2016\obj\Debug\Assembly-CSharp.pdb
