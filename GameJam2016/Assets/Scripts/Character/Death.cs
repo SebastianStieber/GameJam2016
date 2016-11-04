@@ -3,12 +3,10 @@ using System.Collections;
 
 public class Death : MonoBehaviour {
 
-	void OnTriggerEnter2D (Collider2D other)
+
+	public void Thorn()
 	{
-		if (other.tag == "Player") 
-		{
-			Debug.Log ("b");
-		}
+			Debug.Log ("b"); 
 	}
 		
 }
