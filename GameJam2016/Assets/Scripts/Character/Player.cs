@@ -133,7 +133,11 @@ public class Player : MonoBehaviour {
 	}
 
 	void CheckForTrigger(){
+		
 		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<Death>().Thorn();
+		    
 			
 		}
 	}
