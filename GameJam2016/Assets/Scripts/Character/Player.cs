@@ -136,7 +136,7 @@ public class Player : MonoBehaviour {
 		
 		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
 
-			controller.collisions.triggerHit.collider.gameObject.GetComponent<Death>().Thorn();
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn>().Die();
 		    
 			
 		}
