@@ -141,8 +141,15 @@ public class Player : MonoBehaviour {
 	}
 
 	void CheckForTrigger(){
+		
 		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
-			
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn>().Die();
+		}
+
+		if (controller.collisions.triggerHit.collider.tag == "LifeUp") {
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<LifeUp>().Up();
 		}
 	}
 }
