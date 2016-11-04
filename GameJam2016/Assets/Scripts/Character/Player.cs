@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 [RequireComponent (typeof (Controller))]
 public class Player : MonoBehaviour {
@@ -52,8 +53,11 @@ public class Player : MonoBehaviour {
 		float targetVelocityX = input.x * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 
+		if(controller.collisions.triggerHit)
+			CheckForTrigger ();
+			
 		bool wallSliding = false;
-		if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) {
+		if (((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0) && (controller.collisions.hit && controller.collisions.hit.collider.tag != "Stone")) {
 			wallSliding = true;
 
 			if (velocity.y < -wallSlideSpeedMax) {
@@ -66,15 +70,16 @@ public class Player : MonoBehaviour {
 
 				if (input.x != wallDirX && input.x != 0) {
 					timeToWallUnstick -= Time.deltaTime;
-				}
-				else {
+				} else {
 					timeToWallUnstick = wallStickTime;
 				}
-			}
-			else {
+			} else {
 				timeToWallUnstick = wallStickTime;
 			}
 
+		} else if (((controller.collisions.left || controller.collisions.right) && controller.collisions.below && velocity.y == 0) && (controller.collisions.hit && controller.collisions.hit.collider.tag == "Stone")){
+			Debug.Log("Stone");
+			controller.collisions.hit.collider.gameObject.GetComponent<Stone>().Move (controller.collisions.faceDir);
 		}
 
 		if (Input.GetButtonDown ("Jump")) {
@@ -101,8 +106,7 @@ public class Player : MonoBehaviour {
 				velocity.y = minJumpVelocity;
 			}
 		}
-
-
+			
 		velocity.y += gravity * Time.deltaTime;
 		if (oldCanMove != canMove)
 			velocity.y = 0;
@@ -126,5 +130,11 @@ public class Player : MonoBehaviour {
 	void OnDrawGizmos(){
 		Gizmos.color = new Color (0, 0, 1, .5f);
 		Gizmos.DrawSphere (spawn, .2f);
+	}
+
+	void CheckForTrigger(){
+		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
+			
+		}
 	}
 }
