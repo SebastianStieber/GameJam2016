@@ -3,10 +3,16 @@ using System.Collections;
 
 public class Fairy : MonoBehaviour {
 
+	public GameObject fee;
+
 	//public GameObject fee;
 	public void Collect ()
 	{
-		Destroy (gameObject);
+		if (fee.activeInHierarchy == false) {
+			Destroy (gameObject);
+			fee.SetActive(true);
+
+		}
 	}
 }
 
