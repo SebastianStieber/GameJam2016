@@ -6,8 +6,8 @@ public class Thorn : MonoBehaviour {
 
 	public void Die()
 	{
-		Application.LoadLevel(Application.loadedLevel);
-		GameManager.instance.life = 3;
+		GameObject.FindGameObjectWithTag ("Player").GetComponent<Player> ().Restart ();
+		GameManager.instance.life--;
 	}
 		
 }
