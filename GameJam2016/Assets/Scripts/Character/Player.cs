@@ -175,5 +175,14 @@ public class Player : MonoBehaviour {
 		if (controller.collisions.triggerHit.collider.tag == "Fairy") {
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<Fairy> ().Collect ();
 		}
+		if (controller.collisions.triggerHit.collider.tag == "LevelChange") {
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<LevelChange> ().Change ();
+		}
+
+		if (controller.collisions.triggerHit.collider.tag == "EnemyLaser") {
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<EnemyLaser> ().EnemyAttack ();
+		}
 	}
 }
