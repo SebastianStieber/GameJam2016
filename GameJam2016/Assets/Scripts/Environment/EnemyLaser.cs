@@ -4,11 +4,22 @@ using System.Collections;
 public class EnemyLaser : MonoBehaviour {
 	
 	public float timer;
-	public void EnemyAttack()
+	public GameObject shield;
 
+	void Awake(){
+		shield = GameObject.FindGameObjectWithTag ("PlayerFairy");
+	}
+
+	public void EnemyAttack()
 	{
-		GameManager.instance.life--;
-		Destroy (gameObject);
+		if (shield.activeInHierarchy == true) {
+			shield.SetActive (false);
+			Destroy (gameObject);
+		} else {
+				GameManager.instance.life--;
+				Destroy (gameObject);
+		
+		}
 	}
 
 	void Update(){

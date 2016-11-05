@@ -44,3 +44,8 @@ C:\Users\Gogo\Desktop\GameJam2016\GameJam2016\Temp\bin\Debug\UnityEditor.xml
 C:\Users\Gogo\Desktop\GameJam2016\GameJam2016\Temp\bin\Debug\UnityEngine.UI.xml
 C:\Users\Gogo\Desktop\GameJam2016\GameJam2016\Temp\bin\Debug\UnityEngine.Networking.xml
 C:\Users\Gogo\Desktop\GameJam2016\GameJam2016\Temp\bin\Debug\UnityEngine.Analytics.xml
+<<<<<<< HEAD
+C:\Users\Misaki\Desktop\Gamejam\GameJam2016\GameJam2016\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+=======
+C:\Users\Gogo\Desktop\GameJam2016\GameJam2016\Temp\bin\Debug\Assembly-CSharp-firstpass.pdb
+>>>>>>> d1d99b1911f42f889954f21f128576bcf23a6a42
