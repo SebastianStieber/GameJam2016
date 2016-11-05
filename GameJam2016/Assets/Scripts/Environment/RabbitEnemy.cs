@@ -64,8 +64,6 @@ public class RabbitEnemy : MonoBehaviour {
 		
 			laserBody.velocity = new Vector3 (direction,0,0);
 
-			//laser.transform.position = transform.position - direction;
-
 			hit = false;
 
 		}
