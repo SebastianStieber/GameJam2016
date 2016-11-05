@@ -7,7 +7,9 @@ public class RabbitEnemy : MonoBehaviour {
 	public int  hitCount;
 	public GameObject prefab;
 	Rigidbody2D laserBody;
-	GameObject player;
+	public GameObject player;
+	Transform playerPos;
+	public bool hit;
 
 	void Awake()
 	{
@@ -19,6 +21,7 @@ public class RabbitEnemy : MonoBehaviour {
 		anim = GetComponent<Animator> ();
 		laserBody = GetComponent<Rigidbody2D> ();
 		player = GameObject.FindGameObjectWithTag ("Player");
+		playerPos = player.transform;
 	}
 
 	void OnCollisionEnter2D (Collision2D other)
@@ -27,13 +30,12 @@ public class RabbitEnemy : MonoBehaviour {
 			
 			hitCount++;
 
-			GameObject laser = Instantiate (prefab);
-			laser.transform.position = this.transform.position;
-			laserBody.AddForce (transform.up * Time.deltaTime);
+			hit = true;
 		}
 	}
 	
-	void Update(){
+	void Update()
+	{
 			
 			if (hitCount == 5) 
 		{
@@ -44,5 +46,15 @@ public class RabbitEnemy : MonoBehaviour {
 		}
 				
 
+	}
+
+	void FixedUpdate()
+	{
+		if (hit == true) 
+		{
+			GameObject laser = Instantiate (prefab);
+			laser.transform.position = this.transform.position;
+			laserBody.AddForce ((playerPos.position - this.transform.position) * 10);
+		}
 	}
 }
