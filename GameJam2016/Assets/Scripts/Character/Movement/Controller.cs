@@ -27,6 +27,10 @@ public class Controller : RaycastController {
 		playerInput = input;
 
 		if (velocity.x != 0) {
+			if ((velocity.x > 0 && GetComponent<SpriteRenderer>().flipX) || (velocity.x < 0 && !GetComponent<SpriteRenderer>().flipX))
+				GetComponent<SpriteRenderer> ().flipX = !GetComponent<SpriteRenderer>().flipX;
+			Debug.Log(velocity.x + " " + GetComponent<SpriteRenderer>().flipX);
+
 			collisions.faceDir = (int)Mathf.Sign(velocity.x);
 		}
 
@@ -107,13 +111,13 @@ public class Controller : RaycastController {
 
 			Vector2 rayOrigin = (directionY == -1)?raycastOrigins.bottomLeft:raycastOrigins.topLeft;
 			rayOrigin += Vector2.right * (verticalRaySpacing * i + velocity.x);
-			collisions.hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
+			RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, collisionMask);
 			collisions.triggerHit = Physics2D.Raycast(rayOrigin, Vector2.up * directionY, rayLength, triggerMask);
 
 			Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength,Color.red);
 
-			if (collisions.hit) {
-				if (collisions.hit.collider.tag == "Through") {
+			if (hit) {
+				if (hit.collider.tag == "Through") {
 					if (directionY == 1 || collisions.hit.distance == 0) {
 						continue;
 					}
@@ -127,8 +131,8 @@ public class Controller : RaycastController {
 					}
 				}
 
-				velocity.y = (collisions.hit.distance - skinWidth) * directionY;
-				rayLength = collisions.hit.distance;
+				velocity.y = (hit.distance - skinWidth) * directionY;
+				rayLength = hit.distance;
 
 				if (collisions.climbingSlope) {
 					velocity.x = velocity.y / Mathf.Tan(collisions.slopeAngle * Mathf.Deg2Rad) * Mathf.Sign(velocity.x);

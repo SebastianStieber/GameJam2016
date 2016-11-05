@@ -8,6 +8,6 @@ public class Stone : MonoBehaviour {
 
 	public void Move(int direction){
 		Vector3 movement = new Vector3 (force, 0, 0) * direction;
-		transform.position += movement;
+		transform.position = Vector3.Lerp (transform.position, transform.position + movement, Time.deltaTime);
 	}
 }
