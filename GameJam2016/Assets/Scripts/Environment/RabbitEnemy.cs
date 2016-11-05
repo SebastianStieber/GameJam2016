@@ -12,6 +12,8 @@ public class RabbitEnemy : MonoBehaviour {
 	public int  hitCount;
 	public GameObject prefab;
 	public GameObject player;
+	public Transform attackPos;
+	public Transform direction = null;
 
 
 	void Start()
@@ -56,8 +58,8 @@ public class RabbitEnemy : MonoBehaviour {
 		if (hit == true) 
 		{
 			GameObject laser = Instantiate (prefab);
-			laser.transform.position = this.transform.position;
-			laserBody.AddForce ((playerPos.position - this.transform.position) * 200);
+			laser.transform.position = attackPos.transform.position;
+			laserBody.AddForce (Vector2.left * 200);
 
 		}
 	}
