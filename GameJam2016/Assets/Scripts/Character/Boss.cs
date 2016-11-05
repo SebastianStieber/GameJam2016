@@ -36,7 +36,7 @@ public class Boss : MonoBehaviour {
 		GetComponent<Animator> ().SetBool ("Attack", true);
 
 		StartCoroutine (Reset ());
-	}
+	} 
 
 	IEnumerator Reset(){
 		yield return new WaitForSeconds (.1f);
