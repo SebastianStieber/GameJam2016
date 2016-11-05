@@ -95,18 +95,18 @@ public class Player : MonoBehaviour {
 				if (wallDirX == input.x) {
 					velocity.x = -wallDirX * wallJumpClimb.x;
 					velocity.y = wallJumpClimb.y;
-				}
-				else if (input.x == 0) {
+				} else if (input.x == 0) {
 					velocity.x = -wallDirX * wallJumpOff.x;
 					velocity.y = wallJumpOff.y;
-				}
-				else {
+				} else {
 					velocity.x = -wallDirX * wallLeap.x;
 					velocity.y = wallLeap.y;
 				}
 			}
+
 			if (controller.collisions.below) {
 				velocity.y = maxJumpVelocity;
+				GetComponent<AudioSource> ().Play ();
 			}
 		}
 		if (Input.GetButtonUp ("Jump")) {
