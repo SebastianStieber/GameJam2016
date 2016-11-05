@@ -3,13 +3,38 @@ using System.Collections;
 
 public class RabbitEnemy : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
+	Animator anim;
+	public int  hitCount;
+
+	void Awake()
+	{
+		hitCount = 0;
+	}
+
+	void Start()
+	{
+		anim = GetComponent<Animator> ();
+	}
+
+	void OnCollisionEnter2D (Collision2D other)
+	{ 
+		if (other.gameObject.tag == "Arrow" && hitCount >= 0) {
+			
+			hitCount++;
+
+		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void Update(){
+			
+			if (hitCount == 2) 
+		{
+
+				Destroy (gameObject);
+
+
+		}
+				
+
 	}
 }
