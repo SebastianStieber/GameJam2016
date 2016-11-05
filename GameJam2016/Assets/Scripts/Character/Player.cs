@@ -140,16 +140,21 @@ public class Player : MonoBehaviour {
 		Gizmos.DrawSphere (spawn, .2f);
 	}
 
-	void CheckForTrigger(){
+	void CheckForTrigger ()
+	{
 		
 		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
 
-			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn>().Die();
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn> ().Die ();
 		}
 
 		if (controller.collisions.triggerHit.collider.tag == "LifeUp") {
 
-			controller.collisions.triggerHit.collider.gameObject.GetComponent<LifeUp>().Up();
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<LifeUp> ().Up ();
+		}
+		if (controller.collisions.triggerHit.collider.tag == "Fairy") {
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<Fairy> ().Collect ();
 		}
 	}
 }
