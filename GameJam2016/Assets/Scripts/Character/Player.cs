@@ -157,5 +157,9 @@ public class Player : MonoBehaviour {
 
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<Fairy> ().Collect ();
 		}
+		if (controller.collisions.triggerHit.collider.tag == "LevelChange") {
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<LevelChange> ().Change ();
+		}
 	}
 }
