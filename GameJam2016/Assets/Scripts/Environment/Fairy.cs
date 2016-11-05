@@ -10,10 +10,13 @@ public class Fairy : MonoBehaviour {
 	{
 		if (fee.activeInHierarchy == false) {
 			Destroy (gameObject);
-			fee.SetActive(true);
+			fee.SetActive (true);
 
 		}
 	}
-}
+	}
+		
+	
+
 
 
