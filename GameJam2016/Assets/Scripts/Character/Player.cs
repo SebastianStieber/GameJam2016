@@ -184,5 +184,7 @@ public class Player : MonoBehaviour {
 
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<EnemyLaser> ().EnemyAttack ();
 		}
+
+
 	}
 }
