@@ -5,6 +5,8 @@ public class RabbitEnemy : MonoBehaviour {
 
 	Animator anim;
 	public int  hitCount;
+	public GameObject prefab;
+	public Vector3 distance;
 
 	void Awake()
 	{
@@ -21,7 +23,8 @@ public class RabbitEnemy : MonoBehaviour {
 		if (other.gameObject.tag == "Arrow" && hitCount >= 0) {
 			
 			hitCount++;
-
+			GameObject laser = Instantiate (prefab);
+			laser.transform.position = transform.position + distance * GetComponent<Controller> ().collisions.faceDir;
 
 		}
 	}
