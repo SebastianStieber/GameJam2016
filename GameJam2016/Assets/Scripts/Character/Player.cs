@@ -32,14 +32,16 @@ public class Player : MonoBehaviour {
 	float minY;
 
 	Controller controller;
+	Animator animator;
+	bool wallSliding = false;
 
 	void Start() {
 		controller = GetComponent<Controller> ();
+		animator = GetComponent<Animator> ();
 
 		gravity = -(2 * maxJumpHeight) / Mathf.Pow (timeToJumpApex, 2);
 		maxJumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
 		minJumpVelocity = Mathf.Sqrt (2 * Mathf.Abs (gravity) * minJumpHeight);
-		print ("Gravity: " + gravity + "  Jump Velocity: " + maxJumpVelocity);
 
 		transform.position = spawn;
 
@@ -50,18 +52,11 @@ public class Player : MonoBehaviour {
 		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
 		int wallDirX = (controller.collisions.left) ? -1 : 1;
 
-		if (input.x != 0)
-			GetComponent<Animator> ().SetBool ("Running", true);
-		else 
-			GetComponent<Animator> ().SetBool ("Running", false);
-
 		float targetVelocityX = input.x * moveSpeed;
 		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
 
 		if(controller.collisions.triggerHit)
 			CheckForTrigger ();
-			
-		bool wallSliding = false;
 		if (((controller.collisions.left || controller.collisions.right) && !controller.collisions.below && velocity.y < 0)) {
 			wallSliding = true;
 
@@ -82,7 +77,8 @@ public class Player : MonoBehaviour {
 				timeToWallUnstick = wallStickTime;
 			}
 
-		} 
+		}  else
+			wallSliding = false;
 
 		if (((controller.collisions.left || controller.collisions.right) && controller.collisions.below && velocity.y == 0) && (controller.collisions.hit)){
 			if (controller.collisions.hit.collider.tag == "Stone" && velocity.y == 0) {
@@ -129,6 +125,8 @@ public class Player : MonoBehaviour {
 
 		if (transform.position.y + controller.boxCollider.bounds.extents.y < minY)
 			Restart ();
+
+		CheckAnimation ();
 	}
 
 	public void Restart(){
@@ -140,21 +138,41 @@ public class Player : MonoBehaviour {
 		Gizmos.DrawSphere (spawn, .2f);
 	}
 
+	void CheckAnimation(){
+		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
+
+		if (input.x != 0 && !wallSliding && !Input.GetMouseButtonDown(0) && controller.collisions.below)
+			GetComponent<Animator> ().SetBool ("Running", true);
+		else 
+			GetComponent<Animator> ().SetBool ("Running", false);
+		if (input.x == 0 && velocity.y == 0 && !wallSliding && !Input.GetMouseButtonDown(0))
+			GetComponent<Animator> ().SetBool ("Idle", true);
+		else 
+			GetComponent<Animator> ().SetBool ("Idle", false);
+		if (wallSliding)
+			GetComponent<Animator> ().SetBool ("WallSlide", true);
+		else 
+			GetComponent<Animator> ().SetBool ("WallSlide", false);
+		if (!wallSliding && !controller.collisions.below)
+			GetComponent<Animator> ().SetBool ("Jump", true);
+		else 
+			GetComponent<Animator> ().SetBool ("Jump", false);
+		if (Input.GetMouseButtonDown(0) && controller.collisions.below)
+			GetComponent<Animator> ().SetBool ("Shot", true);
+		else 
+			GetComponent<Animator> ().SetBool ("Shot", false);
+	}
+
 	void CheckForTrigger ()
 	{
-		Debug.Log ("fuck1");
+		Debug.Log ("fuck");
 		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
-
-			Debug.Log ("fuck2");
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn> ().Die ();
 		}
-
 		if (controller.collisions.triggerHit.collider.tag == "LifeUp") {
-
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<LifeUp> ().Up ();
 		}
 		if (controller.collisions.triggerHit.collider.tag == "Fairy") {
-
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<Fairy> ().Collect ();
 		}
 	}
