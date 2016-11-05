@@ -7,23 +7,21 @@ public class RabbitEnemy : MonoBehaviour {
 	Rigidbody2D laserBody;
 	Transform playerPos;
 	public Vector3 speed;
-	float direction;
+
 
 	bool hit;
 
+	public float cooldown = 1;
 	public int  hitCount;
 	public GameObject prefab;
 	public GameObject player;
-	public Transform attackPos;
 
 
 	void Start()
 	{
 
 		anim = GetComponent<Animator> ();
-		laserBody = GetComponent<Rigidbody2D> ();
 		player = GameObject.FindGameObjectWithTag ("Player");
-		playerPos = player.transform;
 		hitCount = 0;
 	
 
@@ -42,6 +40,7 @@ public class RabbitEnemy : MonoBehaviour {
 	
 	void Update()
 	{
+		playerPos = player.transform;
 			
 			if (hitCount == 5) 
 		{
@@ -59,7 +58,14 @@ public class RabbitEnemy : MonoBehaviour {
 		if (hit == true) 
 		{
 			GameObject laser = Instantiate (prefab);
-			laser.transform.position += speed * 3;
+			laserBody = laser.GetComponent<Rigidbody2D>();
+
+			float direction = playerPos.position.x - transform.position.x;
+		
+			laserBody.velocity = new Vector3 (direction,0,0);
+
+			//laser.transform.position = transform.position - direction;
+
 			hit = false;
 
 		}
