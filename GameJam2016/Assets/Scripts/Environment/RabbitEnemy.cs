@@ -6,6 +6,8 @@ public class RabbitEnemy : MonoBehaviour {
 	Animator anim;
 	Rigidbody2D laserBody;
 	Transform playerPos;
+	public Vector3 speed;
+	float direction;
 
 	bool hit;
 
@@ -13,7 +15,6 @@ public class RabbitEnemy : MonoBehaviour {
 	public GameObject prefab;
 	public GameObject player;
 	public Transform attackPos;
-	public Transform direction = null;
 
 
 	void Start()
@@ -58,9 +59,10 @@ public class RabbitEnemy : MonoBehaviour {
 		if (hit == true) 
 		{
 			GameObject laser = Instantiate (prefab);
-			laser.transform.position = attackPos.transform.position;
-			laserBody.AddForce (Vector2.left * 200);
+			laser.transform.position += speed * 3;
+			hit = false;
 
 		}
 	}
+		
 }
