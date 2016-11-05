@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Thorn : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class Thorn : MonoBehaviour {
 	{
 		GameObject.FindGameObjectWithTag ("Player").GetComponent<Player> ().Restart ();
 		GameManager.instance.life--;
+
 	}
 		
 }
