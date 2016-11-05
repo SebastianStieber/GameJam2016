@@ -22,12 +22,13 @@ public class RabbitEnemy : MonoBehaviour {
 			
 			hitCount++;
 
+
 		}
 	}
 	
 	void Update(){
 			
-			if (hitCount == 2) 
+			if (hitCount == 5) 
 		{
 
 				Destroy (gameObject);
