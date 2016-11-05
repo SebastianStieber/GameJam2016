@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour {
 	
@@ -63,7 +64,7 @@ public class Health : MonoBehaviour {
 
 		else if (GameManager.instance.life == 0){
 
-			Application.LoadLevel (Application.loadedLevel);
+			SceneManager.LoadScene (SceneManager.GetActiveScene().name);
 
 		}
 	}

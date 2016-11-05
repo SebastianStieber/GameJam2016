@@ -142,9 +142,10 @@ public class Player : MonoBehaviour {
 
 	void CheckForTrigger ()
 	{
-		
+		Debug.Log ("fuck1");
 		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
 
+			Debug.Log ("fuck2");
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn> ().Die ();
 		}
 
