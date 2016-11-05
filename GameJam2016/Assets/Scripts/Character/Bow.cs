@@ -11,7 +11,7 @@ public class Bow : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetMouseButtonUp (0)) {
+		if (Input.GetMouseButtonDown (0)) {
 			GameObject arrow = Instantiate (prefab);
 			arrow.transform.position = transform.position + distance * GetComponent<Controller> ().collisions.faceDir;
 			arrow.GetComponent<Arrow>().Fire(GetComponent<Controller> ().collisions.faceDir);
