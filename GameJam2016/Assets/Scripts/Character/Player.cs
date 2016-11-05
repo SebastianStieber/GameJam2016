@@ -131,7 +131,7 @@ public class Player : MonoBehaviour {
 			Restart ();
 	}
 
-	void Restart(){
+	public void Restart(){
 		transform.position = spawn;
 	}
 
