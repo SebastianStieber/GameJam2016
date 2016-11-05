@@ -49,7 +49,6 @@ public class Health : MonoBehaviour {
 			Heart3.enabled = false;
 			Heart5.enabled = false;
 			Heart4.enabled = false;
-			Heart3.enabled = true;
 			Heart2.enabled = true;
 			Heart1.enabled = true;
 		}

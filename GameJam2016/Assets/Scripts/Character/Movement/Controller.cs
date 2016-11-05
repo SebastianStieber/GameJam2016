@@ -29,7 +29,6 @@ public class Controller : RaycastController {
 		if (velocity.x != 0) {
 			if ((velocity.x > 0 && GetComponent<SpriteRenderer>().flipX) || (velocity.x < 0 && !GetComponent<SpriteRenderer>().flipX))
 				GetComponent<SpriteRenderer> ().flipX = !GetComponent<SpriteRenderer>().flipX;
-			Debug.Log(velocity.x + " " + GetComponent<SpriteRenderer>().flipX);
 
 			collisions.faceDir = (int)Mathf.Sign(velocity.x);
 		}

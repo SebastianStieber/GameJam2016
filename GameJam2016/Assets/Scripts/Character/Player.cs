@@ -95,18 +95,18 @@ public class Player : MonoBehaviour {
 				if (wallDirX == input.x) {
 					velocity.x = -wallDirX * wallJumpClimb.x;
 					velocity.y = wallJumpClimb.y;
-				}
-				else if (input.x == 0) {
+				} else if (input.x == 0) {
 					velocity.x = -wallDirX * wallJumpOff.x;
 					velocity.y = wallJumpOff.y;
-				}
-				else {
+				} else {
 					velocity.x = -wallDirX * wallLeap.x;
 					velocity.y = wallLeap.y;
 				}
 			}
+
 			if (controller.collisions.below) {
 				velocity.y = maxJumpVelocity;
+				GetComponent<AudioSource> ().Play ();
 			}
 		}
 		if (Input.GetButtonUp ("Jump")) {
@@ -131,7 +131,7 @@ public class Player : MonoBehaviour {
 			Restart ();
 	}
 
-	void Restart(){
+	public void Restart(){
 		transform.position = spawn;
 	}
 
@@ -140,16 +140,22 @@ public class Player : MonoBehaviour {
 		Gizmos.DrawSphere (spawn, .2f);
 	}
 
-	void CheckForTrigger(){
-		
+	void CheckForTrigger ()
+	{
+		Debug.Log ("fuck1");
 		if (controller.collisions.triggerHit.collider.tag == "Thorn") {
 
-			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn>().Die();
+			Debug.Log ("fuck2");
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<Thorn> ().Die ();
 		}
 
 		if (controller.collisions.triggerHit.collider.tag == "LifeUp") {
 
-			controller.collisions.triggerHit.collider.gameObject.GetComponent<LifeUp>().Up();
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<LifeUp> ().Up ();
+		}
+		if (controller.collisions.triggerHit.collider.tag == "Fairy") {
+
+			controller.collisions.triggerHit.collider.gameObject.GetComponent<Fairy> ().Collect ();
 		}
 	}
 }
