@@ -43,6 +43,5 @@ public class Boss : MonoBehaviour {
 
 		GetComponent<Animator> ().SetBool ("Attack", false);
 
-
 	}
 }
