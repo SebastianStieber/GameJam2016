@@ -180,11 +180,6 @@ public class Player : MonoBehaviour {
 			controller.collisions.triggerHit.collider.gameObject.GetComponent<LevelChange> ().Change ();
 		}
 
-		if (controller.collisions.triggerHit.collider.tag == "EnemyLaser") {
-
-			controller.collisions.triggerHit.collider.gameObject.GetComponent<EnemyLaser> ().EnemyAttack ();
-		}
-
 
 	}
 }

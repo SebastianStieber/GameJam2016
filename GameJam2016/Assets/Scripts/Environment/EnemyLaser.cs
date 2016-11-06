@@ -15,6 +15,7 @@ public class EnemyLaser : MonoBehaviour {
 		if (shield.activeInHierarchy == true) {
 			shield.SetActive (false);
 			Destroy (gameObject);
+
 		} else {
 				GameManager.instance.life--;
 				Destroy (gameObject);

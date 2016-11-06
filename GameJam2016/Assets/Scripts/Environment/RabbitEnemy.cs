@@ -58,6 +58,7 @@ public class RabbitEnemy : MonoBehaviour {
 		if (hit == true) 
 		{
 			GameObject laser = Instantiate (prefab);
+
 			laserBody = laser.GetComponent<Rigidbody2D>();
 
 			float direction = playerPos.position.x - transform.position.x;
