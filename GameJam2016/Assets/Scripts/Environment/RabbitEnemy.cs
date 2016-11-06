@@ -4,9 +4,10 @@ using System.Collections;
 public class RabbitEnemy : MonoBehaviour {
 
 	Animator anim;
-	Rigidbody2D laserBody;
 	Transform playerPos;
 	public Vector3 speed;
+	public GameObject attackPos;
+	public float force = 1f;
 
 
 	bool hit;
@@ -14,14 +15,13 @@ public class RabbitEnemy : MonoBehaviour {
 	public float cooldown = 1;
 	public int  hitCount;
 	public GameObject prefab;
-	public GameObject player;
+
 
 
 	void Start()
 	{
 
 		anim = GetComponent<Animator> ();
-		player = GameObject.FindGameObjectWithTag ("Player");
 		hitCount = 0;
 	
 
@@ -40,34 +40,31 @@ public class RabbitEnemy : MonoBehaviour {
 	
 	void Update()
 	{
-		playerPos = player.transform;
+		
+     
 			
 			if (hitCount == 5) 
 		{
 				Destroy (gameObject);
 
 		}
-			
 
-
-	
-	}
-
-	void FixedUpdate()
-	{
 		if (hit == true) 
 		{
 			GameObject laser = Instantiate (prefab);
+			laser.transform.position = GameObject.FindGameObjectWithTag ("Player").transform.position - attackPos.transform.position;
 
-			laserBody = laser.GetComponent<Rigidbody2D>();
+			Vector3 direction = GameObject.FindGameObjectWithTag ("Player").transform.position - attackPos.transform.position;
+			laser.GetComponent<Rigidbody2D> ().AddForce(direction * force, ForceMode2D.Impulse);
 
-			float direction = playerPos.position.x - transform.position.x;
-		
-			laserBody.velocity = new Vector3 (direction,0,0);
 
 			hit = false;
 
 		}
+
+
+	
 	}
+		
 		
 }

@@ -3,16 +3,23 @@ using System.Collections;
 
 public class BossShot : MonoBehaviour {
 
-	void Start () {
+	public GameObject shield;
+
+	void Start () 
+	{
+		shield = GameObject.FindGameObjectWithTag("PlayerFairy");
 		
 	}
 
-	void Update () {
-	
-	}
+	void OnTriggerEnter2D(Collider2D collider)
 
-	void OnTriggerEnter2D(Collider2D collider){
-		if (collider.tag == "Player") {
+	{
+		if (shield.activeInHierarchy == true && collider.tag == "Player") 
+		{
+			shield.SetActive (false);
+		}
+		else if (collider.tag == "Player") 
+		{
 			Destroy (gameObject);
 			GameManager.instance.life--;
 		}
